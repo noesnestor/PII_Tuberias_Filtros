@@ -16,10 +16,8 @@ namespace CompAndDel
 
             PictureProvider proveedor = new PictureProvider();
             IPicture imagen = proveedor.GetPicture(@"luke.jpg");
-
-            pipeSerial.Send(imagen);
             
-            proveedor.SavePicture(imagen,@"luke_distorted.jpg");
+            proveedor.SavePicture(pipeSerial.Send(imagen),@"luke_distorted.jpg");
         }
     }
 }
