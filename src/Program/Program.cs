@@ -1,6 +1,7 @@
 ﻿using System;
 using CompAndDel.Pipes;
 using CompAndDel.Filters;
+using TwitterUCU;
 
 namespace CompAndDel
 {
@@ -8,6 +9,7 @@ namespace CompAndDel
     {
         static void Main(string[] args)
         {
+            var twitter = new TwitterImage();
             PipeNull pipeNull = new PipeNull();
             FilterNegative filterNegative = new FilterNegative();
             PipeSerial pipeSerial2 = new PipeSerial(filterNegative,pipeNull);
@@ -21,6 +23,7 @@ namespace CompAndDel
 
             proveedor.SavePicture(pipeSerial.Send(imagen),@"luke_distorted.jpg");
             proveedor.SavePicture(pipeFork.Send(imagen),@"luke_negative.jpg");
+            twitter.PublishToTwitter("Mark Hamil",@"luke_distorted.jpg");
         }
     }
 }
